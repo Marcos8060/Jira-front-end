@@ -12,7 +12,8 @@ module.exports = {
         yellow: '#FFC400',
         secondary: '#F4F5F7',
         white: '#FFFFFF',
-        blue: '#D5E3F8'
+        blue: '#D5E3F8',
+        gray: '#F4F5F7'
       }
     },
   },
