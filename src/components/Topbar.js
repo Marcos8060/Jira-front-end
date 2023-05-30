@@ -7,7 +7,7 @@ const Topbar = () => {
       <section className="bg-white flex items-center justify-between px-4 py-4 h-[10vh]">
         <div className="flex items-center gap-4">
           <RxDashboard />
-          <h1>Jira Work Management</h1>
+          <h1 className="text-xl font-semibold">Jira Work Management</h1>
         </div>
         <div className="flex items-center gap-4">
           <button>Create</button>

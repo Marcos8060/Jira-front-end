@@ -1,8 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Inter+Tight&family=Kumbh+Sans&family=Nunito:wght@400;500;600;700&family=Poltawski+Nowy:wght@500&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Inter+Tight&family=Kumbh+Sans&family=Nunito:wght@400;500;600;700&family=Poltawski+Nowy:wght@500&family=Roboto+Flex:opsz,wght@8..144,400;8..144,500&display=swap');
 
 *{
   font-family: 'Nunito', sans-serif;
