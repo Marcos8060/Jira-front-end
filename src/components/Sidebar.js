@@ -5,7 +5,7 @@ import Link from "next/link";
 const Sidebar = () => {
   return (
     <>
-      <section className="p-4 space-y-4 border-r border-blue h-[90vh]">
+      <section className="p-4 space-y-4 border-r-2 border-blue h-[90vh]">
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-semibold">Projects</h1>
           <GrAdd className="bg-blue p-3 text-4xl rounded-full cursor-pointer" />

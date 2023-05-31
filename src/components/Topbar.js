@@ -11,7 +11,7 @@ const Topbar = () => {
         </div>
         <div className="flex items-center gap-4">
           <button>Create</button>
-          <input className="border border-gray p-2 rounded" type="text" placeholder="Search" />
+          <input className="border border-bluish p-2 rounded focus:outline-none" type="text" placeholder="Search" />
         </div>
       </section>
     </>
