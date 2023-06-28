@@ -18,8 +18,8 @@ const Login = () => {
             <img className='w-40 object-cover mx-auto' src="/images/jira.png" alt="" />
             <h1 className='text-center font-black text-xl uppercase my-4'>Welcome back to Jira</h1>
             <form className='grid'>
-                <input className='w-full border px-2 border-rblue rounded py-3 focus:outline-none my-2' type="email" placeholder='Email' />
-                <input className='border px-2 border-rblue rounded py-3 focus:outline-none my-2' type="password" placeholder='Password' />
+                <input className='w-full border px-2 border-rblue rounded py-2 focus:outline-none my-2' type="email" placeholder='Email' />
+                <input className='border px-2 border-rblue rounded py-2 focus:outline-none my-2' type="password" placeholder='Password' />
                 <button className='bg-rblue text-white px-4 py-2 rounded'>Login</button>
             </form>
         </div>
