@@ -1,6 +1,7 @@
 import React from 'react'
 import Lottie from "lottie-react";
 import animatedData from '../assets/login.json';
+import { authApi } from '@/redux/service/authService';
 
 
 const MyLottieAnimation = () => {
