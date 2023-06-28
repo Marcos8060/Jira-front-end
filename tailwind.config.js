@@ -16,7 +16,8 @@ module.exports = {
         bluish: '#172B4D',
         rblue: '#0052CC',
         gray: '#F4F5F7',
-        green: '#006644'
+        green: '#006644',
+        red: '#FF0000'
       }
     },
   },

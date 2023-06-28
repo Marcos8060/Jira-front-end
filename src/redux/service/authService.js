@@ -1,12 +1,13 @@
 import axios from "axios";
 
 
+const BASE_URL = 'http://localhost:8000/api/'
 class AuthApi {
     
     // Register User
-    registerUserI(data){
+    registerUser(data){
         return new Promise((resolve,reject) =>{
-            axios.post(process.env.API_BASE_URL, data)
+            axios.post(BASE_URL + "register", data)
             .then((res) =>{
                 resolve(res.data)
             })
