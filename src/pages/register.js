@@ -6,6 +6,7 @@ import { authApi } from "@/redux/service/authService";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import { useRouter } from "next/router";
 
 const MyLottieAnimation = () => {
   return <Lottie animationData={animatedData} loop={true} autoplay={true} />;
@@ -13,6 +14,7 @@ const MyLottieAnimation = () => {
 
 const Register = () => {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   console.log("STATE ", loading);
 
@@ -33,18 +35,16 @@ const Register = () => {
 
   const handleSubmit = async (formValue, helpers) => {
     try {
-      console.log("Submitting form...");
       setLoading(true);
       await authApi.registerUser(formValue).then((res) => {
         console.log("RES ", res);
         toast.success("Registration Successful");
         helpers.resetForm();
         setLoading(false);
-        console.log("Form submission completed.");
+        router.push('/login')
       });
     } catch (error) {
       toast.error(error.message);
-      console.log("Form submission completed.");
       setLoading(false);
     }
   };
