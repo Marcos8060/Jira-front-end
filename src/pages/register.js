@@ -36,15 +36,20 @@ const Register = () => {
   const handleSubmit = async (formValue, helpers) => {
     try {
       setLoading(true);
-      await authApi.registerUser(formValue).then((res) => {
-        console.log("RES ", res);
-        toast.success("Registration Successful");
-        helpers.resetForm();
+      const res = await authApi.registerUser(formValue);
+      console.log("RES ",res);
+      if (res.success) {
+        toast.success(res.message);
         setLoading(false);
-        router.push('/login')
-      });
+        helpers.resetForm()
+      } else {
+        console.log("BEFORE ");
+        toast.error(res.message);
+        console.log("AFTER ");
+        setLoading(false);
+      }
     } catch (error) {
-      toast.error(error.message);
+      toast.error(error.response.data.message[0]);
       setLoading(false);
     }
   };

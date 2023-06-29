@@ -9,9 +9,11 @@ class AuthApi {
         return new Promise((resolve,reject) =>{
             axios.post(BASE_URL + "register", data)
             .then((res) =>{
+                console.log("RES ",res);
                 resolve(res.data)
             })
             .catch((err) =>{
+                console.log("ERROR ",err);
                 reject(err)
             })
         })
