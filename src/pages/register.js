@@ -18,13 +18,13 @@ const Register = () => {
 
 
   const initialValues = {
-    name: "",
+    username: "",
     email: "",
     password: "",
   };
 
   const validationSchema = yup.object({
-    name: yup.string("Enter name").required("Name is required"),
+    username: yup.string("Enter username").required("Username is required"),
     email: yup
       .string("Enter email address")
       .email("Enter a valid email")
@@ -72,11 +72,11 @@ const Register = () => {
               <Field
                 className="w-full border px-2 border-rblue rounded py-2 focus:outline-none my-2"
                 type="text"
-                placeholder="Name"
-                name="name"
+                placeholder="Username"
+                name="username"
               />
               <ErrorMessage
-                name="name"
+                name="username"
                 component="div"
                 className="text-red text-xs"
               />
