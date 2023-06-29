@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const BASE_URL = 'http://localhost:8000/api/'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 class AuthApi {
     
     // Register User

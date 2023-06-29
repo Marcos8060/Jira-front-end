@@ -16,7 +16,6 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  console.log("STATE ", loading);
 
   const initialValues = {
     name: "",
@@ -37,16 +36,11 @@ const Register = () => {
     try {
       setLoading(true);
       const res = await authApi.registerUser(formValue);
-      console.log("RES ",res);
       if (res.success) {
         toast.success(res.message);
         setLoading(false);
-        helpers.resetForm()
-      } else {
-        console.log("BEFORE ");
-        toast.error(res.message);
-        console.log("AFTER ");
-        setLoading(false);
+        helpers.resetForm();
+        router.push('/login')
       }
     } catch (error) {
       toast.error(error.response.data.message[0]);
