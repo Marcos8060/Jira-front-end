@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const summary = [
   {
@@ -16,23 +17,15 @@ const summary = [
 ];
 
 const Summary = () => {
-  const [currentUser,setCurrentUser] = useState(null);
-
-
-  useEffect(() => {
-    // retrieve user json string from local storage
-    const jsonString = localStorage.getItem("userDetails");
-    const activeUser = JSON.parse(jsonString);
-    setCurrentUser(activeUser)
-
-  }, []);
+  const { userDetails } = useSelector(({ auth }) => auth)
+  console.log("USER DETAILS ",userDetails)
 
   return (
     <>
       <section>
         <div className="text-center space-y-2">
           <h1 className="text-2xl">
-            Good afternoon {currentUser?.username}
+            Good afternoon {userDetails.username}
           </h1>
           <p className="text-sm">
             Here's where you'll view a summary of Jira Clone's status,

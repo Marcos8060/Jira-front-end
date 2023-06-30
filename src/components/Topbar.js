@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { RxDashboard } from "react-icons/rx";
-import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
-import Stack from "@mui/material/Stack";
+import { deepPurple } from "@mui/material/colors";
 
 const Topbar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -16,9 +15,10 @@ const Topbar = () => {
     setAnchorEl(null);
   };
 
+
   return (
     <>
-      <section className="bg-white flex items-center justify-between px-4 py-4 h-[10vh]">
+      <section className="bg-white flex items-center justify-between px-12 py-4 h-[10vh]">
         <div className="flex items-center gap-4">
           <RxDashboard />
           <h1 className="text-xl font-semibold">Jira Work Management</h1>
@@ -32,16 +32,17 @@ const Topbar = () => {
           />
         </div>
         <div>
-          {/* <Button
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
+          <Avatar
+            sx={{
+              cursor: "pointer",
+              bgcolor: deepPurple[500],
+              height: "30px",
+              width: "30px",
+            }}
             onClick={handleClick}
           >
-            Dashboard
-          </Button> */}
-          <Avatar sx={{cursor:'pointer'}} onClick={handleClick}>H</Avatar>
+            M
+          </Avatar>
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}
@@ -51,7 +52,20 @@ const Topbar = () => {
               "aria-labelledby": "basic-button",
             }}
           >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>
+              <Avatar
+                sx={{
+                  cursor: "pointer",
+                  bgcolor: deepPurple[500],
+                  height: "30px",
+                  width: "30px",
+                }}
+                onClick={handleClick}
+              >
+                M
+              </Avatar>
+              <p>{}</p>
+            </MenuItem>
             <MenuItem onClick={handleClose}>My account</MenuItem>
             <MenuItem onClick={handleClose}>Logout</MenuItem>
           </Menu>
