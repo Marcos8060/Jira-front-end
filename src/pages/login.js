@@ -5,7 +5,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { authApi } from "@/redux/service/authService";
+import { userLogin } from "@/redux/features/authSlice";
+import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
 
@@ -16,6 +17,7 @@ const MyLottieAnimation = () => {
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const initialValues = {
     username: "",
@@ -28,10 +30,9 @@ const Login = () => {
   });
 
   const handleSubmit = async (formValue, helpers) => {
-    console.log("FORM VALUE ", formValue);
     try {
       setLoading(true);
-      await authApi.loginUser(formValue)
+      await dispatch(userLogin(formValue))
       toast.success("Login Successful");
       helpers.resetForm();
       router.push('/')
