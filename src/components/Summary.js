@@ -25,7 +25,7 @@ const Summary = () => {
       <section>
         <div className="text-center space-y-2">
           <h1 className="text-2xl">
-            Good afternoon {userDetails.username}
+            Good afternoon {userDetails?.username}
           </h1>
           <p className="text-sm">
             Here's where you'll view a summary of Jira Clone's status,

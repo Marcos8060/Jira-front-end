@@ -1,8 +1,25 @@
-import React from "react";
+"use client";
+import React, { useEffect } from "react";
 import { GrAdd } from "react-icons/gr";
 import Link from "next/link";
+import { getAllProjects } from "@/redux/features/projects";
+import { useSelector, useDispatch } from "react-redux";
 
 const Sidebar = () => {
+  const { projects } = useSelector(({ project }) => project);
+  const dispatch = useDispatch();
+  console.log("FINALLY ", projects);
+
+  const fetchProjects = async () => {
+    try {
+      await dispatch(getAllProjects());
+    } catch (error) {}
+  };
+
+  useEffect(() => {
+    fetchProjects();
+  }, []);
+
   return (
     <>
       <section className="p-4 space-y-4 border-r-2 border-blue h-[90vh]">

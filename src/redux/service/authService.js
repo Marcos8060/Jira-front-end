@@ -19,7 +19,7 @@ class AuthApi {
 
     loginUser(data){
         return new Promise((resolve,reject) =>{
-            axios.post(BASE_URL + "login", data)
+            axios.post(BASE_URL + "token/", data)
             .then((res) =>{
                 resolve(res.data)
             })

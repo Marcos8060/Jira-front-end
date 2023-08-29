@@ -29,17 +29,18 @@ export const userLogin = (data) => async dispatch => {
     const res = await authApi.loginUser(data)
     // convert user object to JSON string
     const jsonString = JSON.stringify(res.user)
-    localStorage.setItem('userDetails', jsonString)
-    localStorage.setItem('accessToken', res.access)
+    typeof window !== "undefined" ? localStorage.setItem('userDetails', jsonString) : null
+    typeof window !== "undefined" ? localStorage.setItem('accessToken', res.access) : null
+    // typeof window !== "undefined" ? localStorage.setItem('refreshToken', res.refresh) : null
     // retrieve the userdetails
-    const currentUser = JSON.parse(localStorage.getItem('userDetails'))
+    const currentUser = typeof window !== "undefined" ?  JSON.parse(localStorage.getItem('userDetails')) : null
     dispatch(setCurrentUser(currentUser))
 }
 
 export const loadCurrentUser = () => async (dispatch) => {
     try {
       // Retrieve userDetails from local storage
-      const jsonString = localStorage.getItem("userDetails");
+      const jsonString = typeof window !== "undefined" ? localStorage.getItem("userDetails") : null;
       const currentUser = JSON.parse(jsonString);
   
       // Dispatch the setCurrentUser action with the data from local storage
