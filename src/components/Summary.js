@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState,useContext } from "react";
+import { userContext } from "@/AuthContext";
 
 const summary = [
   {
@@ -17,15 +17,16 @@ const summary = [
 ];
 
 const Summary = () => {
-  const { userDetails } = useSelector(({ auth }) => auth)
-  console.log("USER DETAILS ",userDetails)
+  const { user } = useContext(userContext);
+
+  console.log("LOGGED USER ",user)
 
   return (
     <>
       <section>
         <div className="text-center space-y-2">
           <h1 className="text-2xl">
-            Good afternoon {userDetails?.username}
+            Good afternoon 
           </h1>
           <p className="text-sm">
             Here's where you'll view a summary of Jira Clone's status,

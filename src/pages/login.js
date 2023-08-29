@@ -1,51 +1,45 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import Lottie from "lottie-react";
 import animatedData from "../assets/login.json";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import * as yup from "yup";
-import { Formik, Field, Form, ErrorMessage } from "formik";
-import { userLogin } from "@/redux/features/authSlice";
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/router";
-
+import { useFormik } from "formik";
+import { userContext } from "@/AuthContext";
+import { TextField } from "@mui/material";
 
 const MyLottieAnimation = () => {
   return <Lottie animationData={animatedData} loop={true} autoplay={true} />;
 };
 
 const Login = () => {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
-  const dispatch = useDispatch();
-
-  const initialValues = {
-    username: "",
-    password: "",
-  };
+  const { loginUser, message } = useContext(userContext);
 
   const validationSchema = yup.object({
-    username: yup.string("Enter username"),
+    username: yup.string("Enter username").required("Username is required"),
     password: yup.string("Enter password").required("Password is required"),
   });
 
-  const handleSubmit = async (formValue, helpers) => {
-    try {
-      setLoading(true);
-      await dispatch(userLogin(formValue))
-      toast.success("Login Successful");
-      helpers.resetForm();
-      router.push('/')
-    } catch (error) {
-      toast.error(error.response.data.detail);
-      setLoading(false);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values, helpers) => {
+      console.log("LOGIN VALUES ",values);
+      try {
+        loginUser(values.username,values.password);
+        helpers.resetForm();
+      } catch (error) {
+        toast.error(error.message);
+      }
+    },
+  });
 
   return (
     <>
+      {message && toast.error(message)}
       <section className="flex justify-center gap-4 md:w-7/12 w-11/12 h-[70vh] my-20 mx-auto bg-white md:shadow-2xl rounded">
         <div className="md:w-1/2 md:block hidden bg-rblue rounded">
           <MyLottieAnimation />
@@ -59,43 +53,31 @@ const Login = () => {
           <h1 className="text-center font-black text-xl uppercase my-4">
             Welcome back to Jira
           </h1>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={handleSubmit}
-          >
-            <Form className="grid">
-              <Field
-                className="w-full border px-2 border-rblue rounded py-2 focus:outline-none my-2"
-                type="text"
-                placeholder="Username"
-                name="username"
-              />
-              <ErrorMessage
-                name="username"
-                component="div"
-                className="text-red text-xs"
-              />
-              <Field
-                className="border px-2 border-rblue rounded py-2 focus:outline-none my-2"
-                type="password"
-                placeholder="Password"
-                name="password"
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="text-red text-xs"
-              />
-              <button
-                type="submit"
-                disabled={loading}
-                className="bg-rblue text-white px-4 py-2 rounded"
-              >
-                {loading ? "Processing..." : "Login"}
-              </button>
-            </Form>
-          </Formik>
+          <form className="flex flex-col space-y-3" onSubmit={formik.handleSubmit}>
+            <TextField
+              name="username"
+              onChange={formik.handleChange}
+              label="username"
+              onBlur={formik.handleBlur}
+              error={formik.touched.username && Boolean(formik.errors.username)}
+              helperText={formik.touched.username && formik.errors.username}
+            />
+            <TextField
+              name="password"
+              onChange={formik.handleChange}
+              label="password"
+              onBlur={formik.handleBlur}
+              error={formik.touched.password && Boolean(formik.errors.password)}
+              helperText={formik.touched.password && formik.errors.password}
+            />
+            <button
+              type="submit"
+              disabled={formik.isSubmitting}
+              className="bg-rblue text-white px-4 py-2 rounded"
+            >
+              Login
+            </button>
+          </form>
         </div>
       </section>
     </>
