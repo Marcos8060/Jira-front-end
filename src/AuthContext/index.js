@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.log("LOGIN ERROR ",error);
-      setResponseMessage(error);
+      setResponseMessage(error.response.data.detail);
     }
   };
 
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
 
   // REFRESH TOKEN BASED ON EXPIRATION TIME FROM THE REFRESH TOKEN
   useEffect(() => {
-    const refreshTokenWhenExpired = () => {
+    const refreshTokenWhenExpired = async () => {
       if (authToken && authToken.access) {
         const accessToken = jwtDecode(authToken.access);
         const expirationTime = accessToken.exp * 1000; // Convert to milliseconds
@@ -72,7 +72,7 @@ export const AuthProvider = ({ children }) => {
         const timeUntilExpiration = expirationTime - currentTime;
   
         if (timeUntilExpiration <= 0) {
-          refreshToken();
+          await refreshToken();
           console.log('CALLING REFRESH TOKEN');
         }
       }

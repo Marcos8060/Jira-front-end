@@ -19,12 +19,11 @@ const summary = [
 const Summary = () => {
   const { user } = useContext(userContext);
 
-  console.log("LOGGED USER ",user)
 
   return (
     <>
       <section>
-        <div className="text-center space-y-2">
+        <article className="text-center space-y-2">
           <h1 className="text-2xl">
             Good afternoon {user?.username}
           </h1>
@@ -32,10 +31,10 @@ const Summary = () => {
             Here's where you'll view a summary of Jira Clone's status,
             priorities, workload, and more.
           </p>
-        </div>
-        <div className="grid grid-cols-3 gap-4 my-4">
+        </article>
+        <section className="grid grid-cols-3 gap-4 my-4">
           {summary.map((summary, index) => (
-            <div
+            <article
               key={index}
               className="bg-white rounded shadow-xl p-4 text-center h-28 flex items-center justify-center"
             >
@@ -46,9 +45,9 @@ const Summary = () => {
                 <br />
                 {summary.duration}
               </h1>
-            </div>
+            </article>
           ))}
-        </div>
+        </section>
       </section>
     </>
   );

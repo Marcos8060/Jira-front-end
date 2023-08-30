@@ -1,19 +1,24 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect,useContext } from "react";
 import { GrAdd } from "react-icons/gr";
 import Link from "next/link";
 import { getAllProjects } from "@/redux/features/projects";
 import { useSelector, useDispatch } from "react-redux";
+import { userContext } from "@/AuthContext";
 
 const Sidebar = () => {
   const { projects } = useSelector(({ project }) => project);
+  const { user } = useContext(userContext)
   const dispatch = useDispatch();
   console.log("FINALLY ", projects);
+  console.log("USE_AUTH ", user);
 
   const fetchProjects = async () => {
     try {
       await dispatch(getAllProjects());
-    } catch (error) {}
+    } catch (error) {
+      console.log("ERROR FETCHING PROJECTS ",error);
+    }
   };
 
   useEffect(() => {

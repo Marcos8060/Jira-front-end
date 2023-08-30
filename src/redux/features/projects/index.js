@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { projectApi } from "@/redux/service/projects";
 
-
 const initialState = {
     projects: [],
 }
@@ -9,22 +8,22 @@ const initialState = {
 const projectSlice = createSlice({
     name: 'project',
     initialState,
-    reducers:{
-        setProjects:(state,action)=>{
-            state.projects = action.payload
+    reducers: {
+        setProjects: (state, action) => {
+            state.projects = action.payload;
         }
     }
 })
 
 export const { setProjects } = projectSlice.actions
 
-
 export const getAllProjects = () => async dispatch => {
-    const res = await projectApi.fetchProjects()
-    const projectsData = res;
-    console.log("SLICE PROJECTS RESPONSE ",res)
-    dispatch(setProjects(projectsData))
+    try {
+        const projectsData = await projectApi.fetchProjects();
+        dispatch(setProjects(projectsData));
+    } catch (error) {
+        console.error("Error fetching projects:", error);
+    }
 }
-
 
 export default projectSlice.reducer;

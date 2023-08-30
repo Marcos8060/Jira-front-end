@@ -13,7 +13,7 @@ const MyLottieAnimation = () => {
 };
 
 const Login = () => {
-  const { loginUser, message } = useContext(userContext);
+  const { loginUser, responseMessage } = useContext(userContext);
 
   const validationSchema = yup.object({
     username: yup.string("Enter username").required("Username is required"),
@@ -27,19 +27,16 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values, helpers) => {
-      console.log("LOGIN VALUES ",values);
       try {
-        loginUser(values.username,values.password);
+        await loginUser(values.username,values.password);
         helpers.resetForm();
-      } catch (error) {
-        toast.error(error.message);
-      }
+      } catch (error) {}
     },
   });
 
   return (
     <>
-      {message && toast.error(message)}
+      {responseMessage && toast.error(responseMessage)}
       <section className="flex justify-center gap-4 md:w-7/12 w-11/12 h-[70vh] my-20 mx-auto bg-white md:shadow-2xl rounded">
         <div className="md:w-1/2 md:block hidden bg-rblue rounded">
           <MyLottieAnimation />
